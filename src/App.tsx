@@ -113,7 +113,11 @@ const App: React.FunctionComponent = () => {
         <>
             <div className={classes.mainContent}>
                 <header>
-                    <img src="/logo.png" className={classes.logo} />
+                    <img
+                        src="/logo.png"
+                        className={classes.logo}
+                        alt="for the record logo"
+                    />
                     <Typography variant="h3" align="center">
                         For the Record
                     </Typography>
