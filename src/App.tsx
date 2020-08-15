@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField } from "@material-ui/core";
-import ChartContainer from "./ChartContainer";
+import LineChart from "./ChartContainer";
 import { queryData } from "./Query";
 
 function debounce(func: any, wait: number, immediate?: boolean): any {
@@ -51,62 +51,7 @@ const App: React.FunctionComponent = () => {
     );
 
     const chartMemo = useMemo(() => {
-        return (
-            <ChartContainer
-                options={{
-                    type: "line",
-                    data: {
-                        labels: [
-                            "1",
-                            "2",
-                            "3",
-                            "4",
-                            "5",
-                            "6",
-                            "7",
-                            "8",
-                            "9",
-                            "10",
-                        ],
-                        datasets: [
-                            {
-                                label: "# of Votes",
-                                data: weightings,
-                                borderWidth: 1,
-                            },
-                        ],
-                    },
-                    options: {
-                        scales: {
-                            xAxes: [
-                                {
-                                    gridLines: {
-                                        display: false,
-                                    },
-                                },
-                            ],
-                            yAxes: [
-                                {
-                                    gridLines: {
-                                        display: false,
-                                    },
-                                },
-                            ],
-                        },
-                        elements: {
-                            line: {
-                                backgroundColor: "rgb(76, 130, 181)",
-                                borderColor: "rgb(76, 130, 181)",
-                                fill: false,
-                                tension: 0.7,
-                            },
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-                    },
-                }}
-            />
-        );
+        return <LineChart weightings={weightings} />;
     }, [weightings]);
 
     return (

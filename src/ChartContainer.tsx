@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo, useState } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
 
 interface ChartProps {
-    options: ChartJs.ChartConfiguration;
+    weightings: number[];
 }
 
 const useChartStyles = makeStyles((theme) => ({
@@ -13,9 +13,12 @@ const useChartStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChartContainer: React.FunctionComponent<ChartProps> = (props) => {
+const LineChart: React.FunctionComponent<ChartProps> = (props) => {
+    const { weightings } = props;
     const classes = useChartStyles();
     const chartRef = useRef<HTMLCanvasElement>(null);
+    const [chart, setChart] = useState<ChartJs | undefined>(undefined);
+
     useEffect(() => {
         if (!chartRef.current) {
             return;
@@ -24,21 +27,67 @@ const ChartContainer: React.FunctionComponent<ChartProps> = (props) => {
         if (!canvasCtx) {
             throw new Error("Could not obtain canvas context!");
         }
-        const newChart = new ChartJs(canvasCtx, props.options);
+        const newChart = new ChartJs(canvasCtx, {
+            type: "line",
+            data: {
+                labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+                datasets: [
+                    {
+                        label: "# of Votes",
+                        data: weightings,
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    xAxes: [
+                        {
+                            gridLines: {
+                                display: false,
+                            },
+                        },
+                    ],
+                    yAxes: [
+                        {
+                            gridLines: {
+                                display: false,
+                            },
+                        },
+                    ],
+                },
+                elements: {
+                    line: {
+                        backgroundColor: "rgb(76, 130, 181)",
+                        borderColor: "rgb(76, 130, 181)",
+                        fill: false,
+                        tension: 0.2,
+                    },
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+        setChart(newChart);
         return () => {
             newChart.destroy();
         };
-    }, [chartRef, props.options]);
+    }, [chartRef]);
+
+    useEffect(() => {
+        if (!chart) {
+            console.error("No chart to update options on");
+            return;
+        }
+        chart.data.datasets![0].data = weightings;
+        chart.update();
+    }, [weightings]);
 
     return (
         <div className={classes.container}>
-            <canvas
-                id="myChart"
-                ref={chartRef}
-                style={{ height: "100%", width: "100%" }}
-            />
+            <canvas ref={chartRef} style={{ height: "100%", width: "100%" }} />
         </div>
     );
 };
 
-export default ChartContainer;
+export default LineChart;
