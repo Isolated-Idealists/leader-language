@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => {
             position: "fixed",
             bottom: 0,
         },
+        logo: {
+            display: "block",
+            margin: theme.spacing(0, "auto"),
+        },
     };
 });
 
@@ -109,7 +113,10 @@ const App: React.FunctionComponent = () => {
         <>
             <div className={classes.mainContent}>
                 <header>
-                    <Typography align="center">For the Record</Typography>
+                    <img src="/logo.png" className={classes.logo} />
+                    <Typography variant="h3" align="center">
+                        For the Record
+                    </Typography>
                 </header>
                 <TextField
                     variant="outlined"
