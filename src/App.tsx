@@ -102,7 +102,7 @@ const App: React.FunctionComponent = () => {
                             },
                         },
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
                     },
                 }}
             />
