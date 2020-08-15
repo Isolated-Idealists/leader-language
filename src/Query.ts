@@ -32,7 +32,7 @@ const options = {
     // findAllMatches: false,
     // minMatchCharLength: 1,
     // location: 0,
-    // threshold: 0.6,
+    threshold: 0.7,
     // distance: 100,
     // useExtendedSearch: false,
     // ignoreLocation: false,
@@ -45,7 +45,9 @@ export const queryData = (word: string): number[] => {
     Transcripts.forEach((transcript) => {
         const fuse = new Fuse(transcript.content, options);
         let rating = 0;
-        fuse.search(word).forEach((match) => (rating += match.item.weight));
+        const results = fuse.search(word);
+        results.forEach((match) => (rating += match.item.weight));
+        console.log(results);
         ratings.push(rating);
     });
     return ratings;
