@@ -33,7 +33,7 @@ const options = {
     // minMatchCharLength: 1,
     // location: 0,
     threshold: 0.7,
-    // distance: 100,
+    distance: 5,
     // useExtendedSearch: false,
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
