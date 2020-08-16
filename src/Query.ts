@@ -1,4 +1,3 @@
-import Fuse from "fuse.js";
 import Transcripts from "./test.json";
 
 export const transcripts = (Transcripts as Transcript[]).sort((a, b) => {
@@ -30,19 +29,17 @@ export interface Transcript {
     content: ContentPhrase[];
 }
 
-const options = {
-    includeScore: true,
-    shouldSort: false,
-    threshold: 1,
-    distance: 0,
-    keys: ["content.content"],
-};
-
 export const queryData = (word: string): number[] => {
-    const fuse = new Fuse(transcripts, options);
-    const matches = fuse.search(word);
-    const results = matches.map((match) =>
-        match.score! > 0.1 ? match.score! : 0
-    );
-    return results;
+    const refArray: number[] = [];
+    transcripts.forEach((transcript) => {
+        let refs = 0;
+        transcript.content &&
+            transcript.content.forEach((phrase) => {
+                if (phrase.content.includes(` ${word} `)) {
+                    refs++;
+                }
+            });
+        refArray.push(refs);
+    });
+    return refArray;
 };

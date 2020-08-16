@@ -43,7 +43,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                     display: false,
                 },
                 tooltips: {
-                    enabled: false,
+                    enabled: true,
                 },
                 scales: {
                     xAxes: [
