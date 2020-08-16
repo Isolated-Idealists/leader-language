@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
-import { transcripts, ChartDataPoint } from "./Query";
+import { ChartDataPoint } from "./Query";
 
 interface ChartProps {
     dataPoints: ChartDataPoint[];
