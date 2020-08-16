@@ -5,6 +5,8 @@ import {
     TextField,
     createMuiTheme,
     ThemeProvider,
+    Paper,
+    Link,
 } from "@material-ui/core";
 import WordReferencesChart from "./ChartContainer";
 import { queryData, ChartDataPoint } from "./Query";
@@ -47,6 +49,20 @@ const useStyles = makeStyles((theme) => {
             display: "block",
             margin: theme.spacing(2, "auto"),
             width: 100,
+        },
+        references: {
+            maxHeight: 200,
+            scrollY: "auto",
+            overflow: "auto",
+            backgroundColor: "",
+        },
+        referenceListItem: {
+            padding: theme.spacing(1, 0),
+            listStyleType: "none",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "90%",
         },
     };
 });
@@ -91,6 +107,37 @@ const App: React.FunctionComponent = () => {
                         setQuery(term);
                     }}
                 />
+                <Paper
+                    elevation={0}
+                    variant="outlined"
+                    className={classes.references}
+                >
+                    <Typography variant="h6" align="center" gutterBottom>
+                        Key Transcripts
+                    </Typography>
+                    {dataPoints.some((point) => point.references > 4) ? (
+                        <ul>
+                            {dataPoints.map((point) => (
+                                <li
+                                    key={point.transcript.transcriptId}
+                                    className={classes.referenceListItem}
+                                >
+                                    <Link
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        href={`https://pmtranscripts.pmc.gov.au/release/transcript-${point.transcript.transcriptId}`}
+                                    >
+                                        {point.transcript.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <Typography gutterBottom align="center">
+                            No significant references found
+                        </Typography>
+                    )}
+                </Paper>
             </div>
             <div className={classes.timelineContainer}>{chartMemo}</div>
         </ThemeProvider>

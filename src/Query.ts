@@ -40,7 +40,11 @@ export const queryData = (word: string): ChartDataPoint[] => {
         let refs = 0;
         transcript.content &&
             transcript.content.forEach((phrase) => {
-                if (phrase.content.includes(` ${word} `)) {
+                if (
+                    phrase.content
+                        .toLowerCase()
+                        .includes(` ${word.toLowerCase()} `)
+                ) {
                     refs++;
                 }
             });
