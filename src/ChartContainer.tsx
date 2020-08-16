@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
 
@@ -72,7 +72,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
         return () => {
             newChart.destroy();
         };
-    }, [chartRef]);
+    }, [chartRef, weightings]);
 
     useEffect(() => {
         if (!chart) {
@@ -81,7 +81,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
         }
         chart.data.datasets![0].data = weightings;
         chart.update();
-    }, [weightings]);
+    }, [weightings, chart]);
 
     return (
         <div className={classes.container}>
