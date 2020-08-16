@@ -1,4 +1,4 @@
-import Transcripts from "./test.json";
+import Transcripts from "./transcripts.json";
 
 export const transcripts = (Transcripts as Transcript[]).sort((a, b) => {
     const aDate = Date.parse(a.releaseDate);
