@@ -1,4 +1,5 @@
 import Transcripts from "./transcripts.json";
+import FireMap from "./fire.json";
 
 export const transcripts = (Transcripts as Transcript[]).sort((a, b) => {
     const aDate = Date.parse(a.releaseDate);
@@ -6,14 +7,14 @@ export const transcripts = (Transcripts as Transcript[]).sort((a, b) => {
     return bDate - aDate;
 });
 
+export const fires = FireMap as { [key: string]: number };
+
+export interface FireDataPoints {
+    [key: string]: number;
+}
+
 export interface ContentPhrase {
-    /**
-     * A calculated value representing the importance of this phrase
-     */
     weight: number;
-    /**
-     * A phrase or keyword picked out of this transcript at the data processing phase.
-     */
     content: string;
 }
 

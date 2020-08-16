@@ -9,7 +9,7 @@ import {
     Link,
 } from "@material-ui/core";
 import WordReferencesChart from "./ChartContainer";
-import { queryData, ChartDataPoint } from "./Query";
+import { queryData, ChartDataPoint, fires } from "./Query";
 
 const theme = createMuiTheme({
     typography: {
@@ -84,8 +84,15 @@ const App: React.FunctionComponent = () => {
     );
 
     const chartMemo = useMemo(() => {
-        return <WordReferencesChart dataPoints={dataPoints} />;
-    }, [dataPoints]);
+        return (
+            <WordReferencesChart
+                dataPoints={dataPoints}
+                fireDataPoints={
+                    query.toLowerCase() === "fire" ? fires : undefined
+                }
+            />
+        );
+    }, [dataPoints, query]);
 
     return (
         <ThemeProvider theme={theme}>
