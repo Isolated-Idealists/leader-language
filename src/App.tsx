@@ -46,7 +46,7 @@ const App: React.FunctionComponent = () => {
     const [weightings, setWeightings] = useState<number[]>([]);
     const executeQuery = useCallback(
         debounce((word: string) => {
-            setWeightings(queryData(word));
+            setWeightings(queryData(word).map((t) => t.references));
         }, 250),
         []
     );

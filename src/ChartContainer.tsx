@@ -18,7 +18,6 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
     const { weightings } = props;
     const classes = useChartStyles();
     const chartRef = useRef<HTMLCanvasElement>(null);
-
     useEffect(() => {
         if (!chartRef.current) {
             return;
@@ -63,20 +62,13 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                         },
                     ],
                 },
-                animation: {
-                    duration: 0,
-                },
-                hover: {
-                    animationDuration: 0,
-                },
-                responsiveAnimationDuration: 0,
                 elements: {
                     line: {
                         backgroundColor: "rgb(76, 130, 181)",
                         borderColor: "rgb(76, 130, 181)",
                         borderWidth: 2,
                         fill: false,
-                        tension: 0.2,
+                        tension: 0.6,
                     },
                 },
                 responsive: true,

@@ -29,8 +29,10 @@ export interface Transcript {
     content: ContentPhrase[];
 }
 
-export const queryData = (word: string): number[] => {
-    const refArray: number[] = [];
+export const queryData = (
+    word: string
+): { transcript: Transcript; references: number }[] => {
+    const refArray: { transcript: Transcript; references: number }[] = [];
     transcripts.forEach((transcript) => {
         let refs = 0;
         transcript.content &&
@@ -39,7 +41,7 @@ export const queryData = (word: string): number[] => {
                     refs++;
                 }
             });
-        refArray.push(refs);
+        refArray.push({ transcript: transcript, references: refs });
     });
     return refArray;
 };
