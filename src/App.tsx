@@ -35,11 +35,16 @@ function debounce(func: any, wait: number, immediate?: boolean): any {
 
 const useStyles = makeStyles((theme) => {
     return {
+        textField: {
+            backgroundColor: "#f9f9f9",
+        },
         mainContent: {
             width: "40%",
             margin: theme.spacing(0, "auto"),
         },
         timelineContainer: {
+            padding: theme.spacing(1),
+            backgroundColor: "#f9f9f9",
             width: "100%",
             height: "50%",
             position: "fixed",
@@ -51,10 +56,10 @@ const useStyles = makeStyles((theme) => {
             width: 100,
         },
         references: {
+            marginTop: theme.spacing(2),
             maxHeight: 200,
-            scrollY: "auto",
             overflow: "auto",
-            backgroundColor: "",
+            backgroundColor: "#f9f9f9",
         },
         referenceListItem: {
             padding: theme.spacing(1, 0),
@@ -96,6 +101,7 @@ const App: React.FunctionComponent = () => {
                     </Typography>
                 </header>
                 <TextField
+                    className={classes.textField}
                     variant="outlined"
                     label="Search Term"
                     helperText="Enter a political term, controversial topic or viewpoint"
@@ -115,7 +121,7 @@ const App: React.FunctionComponent = () => {
                     <Typography variant="h6" align="center" gutterBottom>
                         Key Transcripts
                     </Typography>
-                    {dataPoints.some((point) => point.references > 4) ? (
+                    {dataPoints.some((point) => point.references >= 7) ? (
                         <ul>
                             {dataPoints.map((point) => (
                                 <li
