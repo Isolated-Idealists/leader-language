@@ -26,29 +26,25 @@ export interface Transcript {
 
 const options = {
     // isCaseSensitive: false,
-    // includeScore: false,
-    // shouldSort: true,
+    includeScore: true,
+    shouldSort: false,
     // includeMatches: false,
     // findAllMatches: false,
     // minMatchCharLength: 1,
     // location: 0,
-    threshold: 0.7,
-    distance: 5,
+    threshold: 1.0,
+    // distance: 5,
     // useExtendedSearch: false,
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
-    keys: ["content"],
+    keys: ["primeMinister", "content.content"],
 };
 
 export const queryData = (word: string): number[] => {
-    const ratings: number[] = [];
-    Transcripts.forEach((transcript) => {
-        const fuse = new Fuse(transcript.content, options);
-        let rating = 0;
-        const results = fuse.search(word);
-        results.forEach((match) => (rating += match.item.weight));
-        console.log(results);
-        ratings.push(rating);
-    });
-    return ratings;
+    const fuse = new Fuse(Transcripts, options);
+    const matches = fuse.search(word);
+    console.log(matches);
+    const results = matches.map((match) => match.score!);
+    console.log(results);
+    return results;
 };

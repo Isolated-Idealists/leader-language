@@ -74,15 +74,6 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
         };
     }, [chartRef, weightings]);
 
-    useEffect(() => {
-        if (!chart) {
-            console.error("No chart to update options on");
-            return;
-        }
-        chart.data.datasets![0].data = weightings;
-        chart.update();
-    }, [weightings, chart]);
-
     return (
         <div className={classes.container}>
             <canvas ref={chartRef} style={{ height: "100%", width: "100%" }} />
