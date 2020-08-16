@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => {
         logo: {
             display: "block",
             margin: theme.spacing(0, "auto"),
+            width: 250,
         },
     };
 });

@@ -39,12 +39,19 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                 ],
             },
             options: {
+                legend: {
+                    display: false,
+                },
+                tooltips: {
+                    enabled: false,
+                },
                 scales: {
                     xAxes: [
                         {
                             gridLines: {
                                 display: false,
                             },
+                            position: "top",
                         },
                     ],
                     yAxes: [
@@ -52,6 +59,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                             gridLines: {
                                 display: false,
                             },
+                            display: false,
                         },
                     ],
                 },
@@ -59,6 +67,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                     line: {
                         backgroundColor: "rgb(76, 130, 181)",
                         borderColor: "rgb(76, 130, 181)",
+                        borderWidth: 50,
                         fill: false,
                         tension: 0.2,
                     },
