@@ -37,7 +37,7 @@ const options = {
     // useExtendedSearch: false,
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
-    keys: ["primeMinister", "content.content"],
+    keys: ["title", "subjects", "primeMinister", "content.content"],
 };
 
 export const queryData = (word: string): number[] => {
