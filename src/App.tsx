@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField } from "@material-ui/core";
-import LineChart from "./ChartContainer";
-import { queryData } from "./Query";
+import WordReferencesChart from "./ChartContainer";
+import { queryData, ChartDataPoint } from "./Query";
 
 function debounce(func: any, wait: number, immediate?: boolean): any {
     var timeout: any = undefined;
@@ -43,17 +43,17 @@ const useStyles = makeStyles((theme) => {
 const App: React.FunctionComponent = () => {
     const classes = useStyles();
     const [query, setQuery] = useState("");
-    const [weightings, setWeightings] = useState<number[]>([]);
+    const [dataPoints, setDataPoints] = useState<ChartDataPoint[]>([]);
     const executeQuery = useCallback(
         debounce((word: string) => {
-            setWeightings(queryData(word).map((t) => t.references));
+            setDataPoints(queryData(word));
         }, 250),
         []
     );
 
     const chartMemo = useMemo(() => {
-        return <LineChart weightings={weightings} />;
-    }, [weightings]);
+        return <WordReferencesChart dataPoints={dataPoints} />;
+    }, [dataPoints]);
 
     return (
         <>

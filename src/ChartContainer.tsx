@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
-import { transcripts } from "./Query";
+import { transcripts, ChartDataPoint } from "./Query";
 
 interface ChartProps {
-    weightings: number[];
+    dataPoints: ChartDataPoint[];
 }
 
 const useChartStyles = makeStyles((theme) => ({
@@ -14,8 +14,8 @@ const useChartStyles = makeStyles((theme) => ({
     },
 }));
 
-const LineChart: React.FunctionComponent<ChartProps> = (props) => {
-    const { weightings } = props;
+const WordReferencesChart: React.FunctionComponent<ChartProps> = (props) => {
+    const { dataPoints } = props;
     const classes = useChartStyles();
     const chartRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
@@ -33,7 +33,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                 datasets: [
                     {
                         label: "Transcript Release Date",
-                        data: weightings,
+                        data: dataPoints.map((point) => point.references),
                     },
                 ],
             },
@@ -78,7 +78,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
         return () => {
             newChart.destroy();
         };
-    }, [chartRef, weightings]);
+    }, [chartRef, dataPoints]);
 
     return (
         <div className={classes.container}>
@@ -87,4 +87,4 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
     );
 };
 
-export default LineChart;
+export default WordReferencesChart;

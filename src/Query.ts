@@ -29,10 +29,13 @@ export interface Transcript {
     content: ContentPhrase[];
 }
 
-export const queryData = (
-    word: string
-): { transcript: Transcript; references: number }[] => {
-    const refArray: { transcript: Transcript; references: number }[] = [];
+export interface ChartDataPoint {
+    transcript: Transcript;
+    references: number;
+}
+
+export const queryData = (word: string): ChartDataPoint[] => {
+    const dataPoints: ChartDataPoint[] = [];
     transcripts.forEach((transcript) => {
         let refs = 0;
         transcript.content &&
@@ -41,7 +44,7 @@ export const queryData = (
                     refs++;
                 }
             });
-        refArray.push({ transcript: transcript, references: refs });
+        dataPoints.push({ transcript: transcript, references: refs });
     });
-    return refArray;
+    return dataPoints;
 };
