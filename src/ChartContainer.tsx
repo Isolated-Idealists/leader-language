@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
 
@@ -17,7 +17,6 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
     const { weightings } = props;
     const classes = useChartStyles();
     const chartRef = useRef<HTMLCanvasElement>(null);
-    const [chart, setChart] = useState<ChartJs | undefined>(undefined);
 
     useEffect(() => {
         if (!chartRef.current) {
@@ -68,7 +67,6 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                 maintainAspectRatio: false,
             },
         });
-        setChart(newChart);
         return () => {
             newChart.destroy();
         };
