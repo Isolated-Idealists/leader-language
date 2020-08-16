@@ -35,7 +35,7 @@ const options = {
     shouldSort: false,
     threshold: 1,
     distance: 0,
-    keys: ["title", "subjects", "primeMinister", "content.content"],
+    keys: ["content.content"],
 };
 
 export const queryData = (word: string): number[] => {
