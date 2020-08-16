@@ -29,7 +29,7 @@ const WordReferencesChart: React.FunctionComponent<ChartProps> = (props) => {
         const newChart = new ChartJs(canvasCtx, {
             type: "line",
             data: {
-                labels: transcripts.map((t) => t.releaseDate),
+                labels: dataPoints.map((point) => point.transcript.releaseDate),
                 datasets: [
                     {
                         label: "Transcript Release Date",

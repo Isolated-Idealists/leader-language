@@ -44,7 +44,8 @@ export const queryData = (word: string): ChartDataPoint[] => {
                     refs++;
                 }
             });
-        dataPoints.push({ transcript: transcript, references: refs });
+        refs > 0 &&
+            dataPoints.push({ transcript: transcript, references: refs });
     });
     return dataPoints;
 };
