@@ -1,8 +1,19 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, TextField } from "@material-ui/core";
+import {
+    Typography,
+    TextField,
+    createMuiTheme,
+    ThemeProvider,
+} from "@material-ui/core";
 import WordReferencesChart from "./ChartContainer";
 import { queryData, ChartDataPoint } from "./Query";
+
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: "Cinzel, serif",
+    },
+});
 
 function debounce(func: any, wait: number, immediate?: boolean): any {
     var timeout: any = undefined;
@@ -34,8 +45,8 @@ const useStyles = makeStyles((theme) => {
         },
         logo: {
             display: "block",
-            margin: theme.spacing(0, "auto"),
-            width: 250,
+            margin: theme.spacing(2, "auto"),
+            width: 100,
         },
     };
 });
@@ -56,7 +67,7 @@ const App: React.FunctionComponent = () => {
     }, [dataPoints]);
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <div className={classes.mainContent}>
                 <header>
                     <img
@@ -82,7 +93,7 @@ const App: React.FunctionComponent = () => {
                 />
             </div>
             <div className={classes.timelineContainer}>{chartMemo}</div>
-        </>
+        </ThemeProvider>
     );
 };
 
