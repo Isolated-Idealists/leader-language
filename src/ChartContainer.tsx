@@ -50,7 +50,8 @@ const WordReferencesChart: React.FunctionComponent<ChartProps> = (props) => {
                             gridLines: {
                                 display: false,
                             },
-                            display: false,
+                            position: "top",
+                            display: true,
                         },
                     ],
                     yAxes: [
@@ -59,6 +60,9 @@ const WordReferencesChart: React.FunctionComponent<ChartProps> = (props) => {
                                 display: false,
                             },
                             display: false,
+                            ticks: {
+                                beginAtZero: true,
+                            },
                         },
                     ],
                 },
