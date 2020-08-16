@@ -64,7 +64,7 @@ const App: React.FunctionComponent = () => {
                         className={classes.logo}
                         alt="for the record logo"
                     />
-                    <Typography variant="h3" align="center">
+                    <Typography variant="h3" align="center" gutterBottom>
                         For the Record
                     </Typography>
                 </header>
