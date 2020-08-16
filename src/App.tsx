@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => {
             margin: theme.spacing(0, "auto"),
         },
         timelineContainer: {
-            padding: theme.spacing(1),
             backgroundColor: "#f9f9f9",
             width: "100%",
             height: "40%",
