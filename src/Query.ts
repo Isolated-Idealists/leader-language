@@ -1,6 +1,12 @@
 import Fuse from "fuse.js";
 import Transcripts from "./test.json";
 
+export const transcripts = (Transcripts as Transcript[]).sort((a, b) => {
+    const aDate = Date.parse(a.releaseDate);
+    const bDate = Date.parse(b.releaseDate);
+    return bDate - aDate;
+});
+
 export interface ContentPhrase {
     /**
      * A calculated value representing the importance of this phrase
@@ -17,7 +23,7 @@ export interface Transcript {
     title: string;
     primeMinister: string;
     periodOfService: string;
-    releaseDate: Date;
+    releaseDate: string;
     releaseType?: string;
     document?: string;
     subjects?: string;
@@ -33,7 +39,7 @@ const options = {
 };
 
 export const queryData = (word: string): number[] => {
-    const fuse = new Fuse(Transcripts, options);
+    const fuse = new Fuse(transcripts, options);
     const matches = fuse.search(word);
     const results = matches.map((match) =>
         match.score! > 0.1 ? match.score! : 0

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import ChartJs from "chart.js";
 import { makeStyles } from "@material-ui/core";
-import Transcripts from "./test.json";
+import { transcripts } from "./Query";
 
 interface ChartProps {
     weightings: number[];
@@ -30,10 +30,10 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
         const newChart = new ChartJs(canvasCtx, {
             type: "line",
             data: {
-                labels: Transcripts.map((t) => t.releaseDate),
+                labels: transcripts.map((t) => t.releaseDate),
                 datasets: [
                     {
-                        label: "# of Votes",
+                        label: "Transcript Release Date",
                         data: weightings,
                     },
                 ],
@@ -51,7 +51,7 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                             gridLines: {
                                 display: false,
                             },
-                            position: "top",
+                            display: false,
                         },
                     ],
                     yAxes: [
@@ -63,6 +63,13 @@ const LineChart: React.FunctionComponent<ChartProps> = (props) => {
                         },
                     ],
                 },
+                animation: {
+                    duration: 0,
+                },
+                hover: {
+                    animationDuration: 0,
+                },
+                responsiveAnimationDuration: 0,
                 elements: {
                     line: {
                         backgroundColor: "rgb(76, 130, 181)",
